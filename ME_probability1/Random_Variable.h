@@ -3,6 +3,7 @@
 #include <random>
 #include <ctime>
 #include <algorithm>
+#include <Eigen/Dense>
 
 //я сначала хотел реализовать возможность менять распределение, но забил, а эта функция осталассь лежать отдельно
 double task_inverse_probability(double x, double lambda) {
@@ -20,31 +21,47 @@ double task_inverse_probability(double x, double lambda) {
 class Random_Variable
 {
 private:
-    //точные парамеиры случайной величины
+    //теоретические парамеиры случайной величины
 	//double (*const density)();
     double parameter;
 	double mean;
 	double variance;
+    double median;
 
     //параметры выборки
-	std::valarray<double> sample;
+	std::vector<double> sample;
     double (* inverse_probability)(double, double);
-	double sample_mean;
-	double sample_variance;
+	double sample_mean;     //выборочное среднее
+	double sample_variance; //выборочная дисперсия
+    double sample_median;     //выборочная дисперсия
+    double sample_range;    //выборочная дисперсия
 public:
     Random_Variable() {
         inverse_probability = task_inverse_probability;
-        parameter = 0;
+
+        parameter = 1;
         mean = 0;
-        variance = 0;
+        variance = 2;
+        median = 0;
+
         sample_mean = 0;
         sample_variance = 0;
+        sample_median = 0;
+        sample_range = 0;
     }
     void set_parameter(double);
     void generate_sample(int);
+
+
+    double get_mean();
+    double get_variance();
+    double get_median();
+
     double get_sample(int);
     double get_sample_mean();
     double get_sample_variance();
+    double get_sample_median();
+    double get_sample_range();
 };
 void Random_Variable::set_parameter(double p) {
     parameter = p;
@@ -56,37 +73,60 @@ void Random_Variable::generate_sample(int size) {
     std::mt19937 gen(time(0));
     std::uniform_real_distribution<> urd(0, 1);
 
+    //генерируем выборку и сразу считаем среднее
+    sample_mean = 0;
     for (int i = 0; i < size; i++) {
-        sample[i] = inverse_probability(urd(gen), parameter);
+        double rnd = inverse_probability(urd(gen), parameter);
+        sample[i] = rnd;
+        sample_mean += rnd;
     }
-    sample_mean = sample.sum() / size;
+    sample_mean /= size;
 
+    //дисперсия
+    sample_variance = 0;
     for (int i = 0; i < size; i++) {
-        sample_variance += (sample[i] - sample_mean) * (sample[i] - sample_mean);
+        double s = sample[i];
+        sample_variance += (s - sample_mean) * (s - sample_mean);
     }
     sample_variance /= (size - 1);
 
-    std::vector<double> vec(size);
-    for (int i = 0; i < size; i++) {
-        vec[i] = sample[i];
+    std::sort(sample.begin(), sample.end());
+
+    //медиана выборки
+    if (size % 2) {
+        sample_median = 0.5 * (sample[size / 2] + sample[size / 2 + 1]);
     }
-    std::sort(vec.begin(), vec.end());
-    for (int i = 0; i < size; i++) {
-        sample[i] = vec[i];
+    else {
+        sample_median = sample[size / 2 + 1];
     }
+
+    //размах выборки
+    sample_range = sample[size - 1] - sample[0];
+}
+
+double Random_Variable::get_mean() {
+    return mean;
+}
+double Random_Variable::get_variance() {
+    return variance;
+}
+double Random_Variable::get_median() {
+    return median;
 }
 
 double Random_Variable::get_sample(int i)
 {
     return sample[i];
 }
-
 double Random_Variable::get_sample_mean() {
     return sample_mean;
 }
-
 double Random_Variable::get_sample_variance() {
     return sample_variance;
 }
-
-
+double Random_Variable::get_sample_median() {
+    return sample_median;
+}
+double Random_Variable::get_sample_range() {
+    return sample_range;
+}
