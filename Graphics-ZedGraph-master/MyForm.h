@@ -1,5 +1,4 @@
 #pragma once
-#include <Eigen/Dense>
 #include <iomanip>
 #include "../ME_probability1/Random_Variable.h"
 
@@ -55,6 +54,7 @@ namespace Graph {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column2;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column3;
 	private: System::Windows::Forms::DataVisualization::Charting::Chart^ chart1;
+	private: System::Windows::Forms::Label^ label3;
 	protected:
 	private: System::ComponentModel::IContainer^  components;
 	private:
@@ -70,12 +70,12 @@ namespace Graph {
 		void InitializeComponent(void)
 		{
 			this->components = (gcnew System::ComponentModel::Container());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle3 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataVisualization::Charting::ChartArea^ chartArea1 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
-			System::Windows::Forms::DataVisualization::Charting::Legend^ legend1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
-			System::Windows::Forms::DataVisualization::Charting::Series^ series1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle10 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle11 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle12 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^ chartArea4 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Legend^ legend4 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
+			System::Windows::Forms::DataVisualization::Charting::Series^ series4 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
 			this->zedGraphControl1 = (gcnew ZedGraph::ZedGraphControl());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
 			this->N = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
@@ -94,6 +94,7 @@ namespace Graph {
 			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->chart1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
+			this->label3 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->BeginInit();
@@ -101,7 +102,7 @@ namespace Graph {
 			// 
 			// zedGraphControl1
 			// 
-			this->zedGraphControl1->Location = System::Drawing::Point(960, 397);
+			this->zedGraphControl1->Location = System::Drawing::Point(171, 146);
 			this->zedGraphControl1->Name = L"zedGraphControl1";
 			this->zedGraphControl1->ScrollGrace = 0;
 			this->zedGraphControl1->ScrollMaxX = 0;
@@ -110,7 +111,7 @@ namespace Graph {
 			this->zedGraphControl1->ScrollMinX = 0;
 			this->zedGraphControl1->ScrollMinY = 0;
 			this->zedGraphControl1->ScrollMinY2 = 0;
-			this->zedGraphControl1->Size = System::Drawing::Size(65, 47);
+			this->zedGraphControl1->Size = System::Drawing::Size(468, 298);
 			this->zedGraphControl1->TabIndex = 0;
 			this->zedGraphControl1->Load += gcnew System::EventHandler(this, &MyForm::zedGraphControl1_Load);
 			// 
@@ -186,7 +187,8 @@ namespace Graph {
 			// 
 			this->textBox_sample_range->Location = System::Drawing::Point(269, 120);
 			this->textBox_sample_range->Name = L"textBox_sample_range";
-			this->textBox_sample_range->Size = System::Drawing::Size(48, 20);
+			this->textBox_sample_range->ReadOnly = true;
+			this->textBox_sample_range->Size = System::Drawing::Size(160, 20);
 			this->textBox_sample_range->TabIndex = 28;
 			this->textBox_sample_range->Text = L"0";
 			// 
@@ -212,18 +214,18 @@ namespace Graph {
 			// 
 			// Column1
 			// 
-			dataGridViewCellStyle1->Alignment = System::Windows::Forms::DataGridViewContentAlignment::TopRight;
-			dataGridViewCellStyle1->Font = (gcnew System::Drawing::Font(L"Consolas", 9));
-			this->Column1->DefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle10->Alignment = System::Windows::Forms::DataGridViewContentAlignment::TopRight;
+			dataGridViewCellStyle10->Font = (gcnew System::Drawing::Font(L"Consolas", 9));
+			this->Column1->DefaultCellStyle = dataGridViewCellStyle10;
 			this->Column1->HeaderText = L"Теоретические характеристики";
 			this->Column1->Name = L"Column1";
 			this->Column1->ReadOnly = true;
 			// 
 			// Column2
 			// 
-			dataGridViewCellStyle2->Alignment = System::Windows::Forms::DataGridViewContentAlignment::TopRight;
-			dataGridViewCellStyle2->Font = (gcnew System::Drawing::Font(L"Consolas", 9));
-			this->Column2->DefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle11->Alignment = System::Windows::Forms::DataGridViewContentAlignment::TopRight;
+			dataGridViewCellStyle11->Font = (gcnew System::Drawing::Font(L"Consolas", 9));
+			this->Column2->DefaultCellStyle = dataGridViewCellStyle11;
 			this->Column2->HeaderText = L"Выборочные характеристики";
 			this->Column2->Name = L"Column2";
 			this->Column2->ReadOnly = true;
@@ -231,9 +233,9 @@ namespace Graph {
 			// 
 			// Column3
 			// 
-			dataGridViewCellStyle3->Alignment = System::Windows::Forms::DataGridViewContentAlignment::TopRight;
-			dataGridViewCellStyle3->Font = (gcnew System::Drawing::Font(L"Consolas", 9));
-			this->Column3->DefaultCellStyle = dataGridViewCellStyle3;
+			dataGridViewCellStyle12->Alignment = System::Windows::Forms::DataGridViewContentAlignment::TopRight;
+			dataGridViewCellStyle12->Font = (gcnew System::Drawing::Font(L"Consolas", 9));
+			this->Column3->DefaultCellStyle = dataGridViewCellStyle12;
 			this->Column3->HeaderText = L"Отклонение";
 			this->Column3->Name = L"Column3";
 			this->Column3->ReadOnly = true;
@@ -250,25 +252,36 @@ namespace Graph {
 			// 
 			// chart1
 			// 
-			chartArea1->Name = L"ChartArea1";
-			this->chart1->ChartAreas->Add(chartArea1);
-			legend1->Name = L"Legend1";
-			this->chart1->Legends->Add(legend1);
+			chartArea4->Name = L"ChartArea1";
+			this->chart1->ChartAreas->Add(chartArea4);
+			legend4->Name = L"Legend1";
+			this->chart1->Legends->Add(legend4);
 			this->chart1->Location = System::Drawing::Point(725, 23);
 			this->chart1->Name = L"chart1";
-			series1->ChartArea = L"ChartArea1";
-			series1->Legend = L"Legend1";
-			series1->Name = L"Series1";
-			this->chart1->Series->Add(series1);
+			series4->ChartArea = L"ChartArea1";
+			series4->Legend = L"Legend1";
+			series4->Name = L"Series1";
+			this->chart1->Series->Add(series4);
 			this->chart1->Size = System::Drawing::Size(300, 300);
 			this->chart1->TabIndex = 31;
 			this->chart1->Text = L"chart1";
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11));
+			this->label3->Location = System::Drawing::Point(12, 426);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(161, 18);
+			this->label3->TabIndex = 32;
+			this->label3->Text = L"f(x) = L/2 * exp(- L * |x|)";
 			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1096, 497);
+			this->Controls->Add(this->label3);
 			this->Controls->Add(this->chart1);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->dataGridView2);
@@ -281,7 +294,7 @@ namespace Graph {
 			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->zedGraphControl1);
 			this->Name = L"MyForm";
-			this->Text = L"MyForm";
+			this->Text = L"Вариант 11";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->EndInit();
@@ -321,10 +334,28 @@ namespace Graph {
 		dataGridView2->Rows[2]->Cells[2]->Value = xi.get_sample_median();
 		dataGridView2->Rows[2]->Cells[3]->Value = abs(xi.get_sample_median() - xi.get_median());
 
+		/*
 		std::ostringstream ost;
 		ost << std::fixed << std::setprecision(5) << xi.get_sample_range();
 		System::String^ s = gcnew System::String(ost.str().c_str());
 		textBox_sample_range->Text = s;
+		*/
+		textBox_sample_range->Text = Convert::ToString(xi.get_sample_range());
+
+		double x_min = -5, x_max = 5, x_cur = x_min, h = 0.1;
+		PointPairList^ CDF_point_list = gcnew ZedGraph::PointPairList();
+		PointPairList^ sample_CDF_point_list = gcnew ZedGraph::PointPairList();
+		while (x_cur < x_max) {
+			CDF_point_list->Add(x_cur, xi.cumulative_distribution_function(x_cur));
+			sample_CDF_point_list->Add(x_cur, xi.sample_cumulative_distribution_function(x_cur));
+			x_cur += h;
+		}
+		GraphPane^ panel = zedGraphControl1->GraphPane;
+		panel->CurveList->Clear();
+		LineItem^ Curve_CDF = panel->AddCurve("Функция распределения", CDF_point_list, Color::Red, SymbolType::None);
+		LineItem^ Curve_sample_CDF = panel->AddCurve("Выборочная функция распределения", sample_CDF_point_list, Color::Blue, SymbolType::None);
+		zedGraphControl1->Invalidate();
+
 	}
 	private: System::Void zedGraphControl1_Load(System::Object^  sender, System::EventArgs^  e) {
 	}
