@@ -36,6 +36,7 @@ public:
     double cumulative_distribution_function(double);
     double sample_cumulative_distribution_function(double);
     double inverse_probability(double);
+    double CDF_difference();
 
     void set_parameter(double);
     void generate_sample(int);
@@ -46,6 +47,7 @@ public:
     double get_median();
 
     double get_sample(int);
+    double get_sample_size();
     double get_sample_mean();
     double get_sample_variance();
     double get_sample_median();
@@ -63,14 +65,17 @@ inline double Random_Variable::sample_cumulative_distribution_function(double x)
         return 0;
     if (x >= sample[sample.size() - 1])
         return 1;
-    int n = sample.size() / 2;
-    while (!(sample[n] <= x && x <= sample[n + 1])) {
-        if (x < sample[n])
-            n *= 0,5;
+    int L = 0;
+    int R = sample.size() - 1;
+    int m;
+    while (!(sample[m] <= x && x <= sample[m + 1])) {
+        m = (L + R) / 2;
+        if (x < sample[m])
+            R = m - 1;
         else
-            n +=  n / 2;
+            L = m + 1;
     }
-    return (n + 1) / (double) sample.size();
+    return (m + 1) / (double) sample.size();
 }
 inline double Random_Variable::inverse_probability(double x){
     double a = parameter / 2;
@@ -82,6 +87,18 @@ inline double Random_Variable::inverse_probability(double x){
     }
     else
         throw 0;
+}
+
+inline double Random_Variable::CDF_difference(){
+    double max = 0;
+    int n = sample.size();
+    for (int i = 0; i < n; i ++) {
+        double a = i / (double) n - cumulative_distribution_function(sample[i] + 0.0000001);
+        double b = cumulative_distribution_function(sample[i]) - (i - 1) / (double)n;
+        if (a > max) max = a;
+        if (b > max) max = b;
+    }
+    return max;
 }
 
 void Random_Variable::set_parameter(double p) {
@@ -138,6 +155,9 @@ double Random_Variable::get_median() {
 double Random_Variable::get_sample(int i)
 {
     return sample[i];
+}
+inline double Random_Variable::get_sample_size(){
+    return sample.size();
 }
 double Random_Variable::get_sample_mean() {
     return sample_mean;

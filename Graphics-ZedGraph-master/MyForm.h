@@ -44,8 +44,8 @@ namespace Graph {
 	private: System::Windows::Forms::Label^  label5;
 	private: System::ComponentModel::BackgroundWorker^ backgroundWorker1;
 	private: System::Windows::Forms::Button^ button1;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ N;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ xi_sample;
+
+
 	private: System::Windows::Forms::TextBox^ textBox_sample_range;
 	private: System::Windows::Forms::DataGridView^ dataGridView2;
 	private: System::Windows::Forms::Label^ label2;
@@ -53,8 +53,12 @@ namespace Graph {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column1;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column2;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column3;
-	private: System::Windows::Forms::DataVisualization::Charting::Chart^ chart1;
+
 	private: System::Windows::Forms::Label^ label3;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ N;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ xi_sample;
+	private: System::Windows::Forms::Label^ label4;
+	private: System::Windows::Forms::TextBox^ textBox_D;
 	protected:
 	private: System::ComponentModel::IContainer^  components;
 	private:
@@ -70,16 +74,11 @@ namespace Graph {
 		void InitializeComponent(void)
 		{
 			this->components = (gcnew System::ComponentModel::Container());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle10 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle11 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle12 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataVisualization::Charting::ChartArea^ chartArea4 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
-			System::Windows::Forms::DataVisualization::Charting::Legend^ legend4 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
-			System::Windows::Forms::DataVisualization::Charting::Series^ series4 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle3 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			this->zedGraphControl1 = (gcnew ZedGraph::ZedGraphControl());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
-			this->N = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->xi_sample = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->textBox_lambda = (gcnew System::Windows::Forms::TextBox());
 			this->textBox_sample_size = (gcnew System::Windows::Forms::TextBox());
@@ -93,16 +92,18 @@ namespace Graph {
 			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->chart1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
 			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->N = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->xi_sample = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->textBox_D = (gcnew System::Windows::Forms::TextBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// zedGraphControl1
 			// 
-			this->zedGraphControl1->Location = System::Drawing::Point(171, 146);
+			this->zedGraphControl1->Location = System::Drawing::Point(221, 146);
 			this->zedGraphControl1->Name = L"zedGraphControl1";
 			this->zedGraphControl1->ScrollGrace = 0;
 			this->zedGraphControl1->ScrollMaxX = 0;
@@ -111,7 +112,7 @@ namespace Graph {
 			this->zedGraphControl1->ScrollMinX = 0;
 			this->zedGraphControl1->ScrollMinY = 0;
 			this->zedGraphControl1->ScrollMinY2 = 0;
-			this->zedGraphControl1->Size = System::Drawing::Size(468, 298);
+			this->zedGraphControl1->Size = System::Drawing::Size(913, 428);
 			this->zedGraphControl1->TabIndex = 0;
 			this->zedGraphControl1->Load += gcnew System::EventHandler(this, &MyForm::zedGraphControl1_Load);
 			// 
@@ -122,22 +123,9 @@ namespace Graph {
 			this->dataGridView1->Location = System::Drawing::Point(12, 12);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->RowHeadersVisible = false;
-			this->dataGridView1->Size = System::Drawing::Size(153, 327);
+			this->dataGridView1->Size = System::Drawing::Size(203, 327);
 			this->dataGridView1->TabIndex = 2;
 			this->dataGridView1->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView1_CellContentClick);
-			// 
-			// N
-			// 
-			this->N->HeaderText = L"№";
-			this->N->Name = L"N";
-			this->N->ReadOnly = true;
-			this->N->Width = 50;
-			// 
-			// xi_sample
-			// 
-			this->xi_sample->HeaderText = L"Значение";
-			this->xi_sample->Name = L"xi_sample";
-			this->xi_sample->ReadOnly = true;
 			// 
 			// label1
 			// 
@@ -150,7 +138,7 @@ namespace Graph {
 			// 
 			// textBox_lambda
 			// 
-			this->textBox_lambda->Location = System::Drawing::Point(117, 345);
+			this->textBox_lambda->Location = System::Drawing::Point(167, 345);
 			this->textBox_lambda->Name = L"textBox_lambda";
 			this->textBox_lambda->Size = System::Drawing::Size(48, 20);
 			this->textBox_lambda->TabIndex = 4;
@@ -158,7 +146,7 @@ namespace Graph {
 			// 
 			// textBox_sample_size
 			// 
-			this->textBox_sample_size->Location = System::Drawing::Point(117, 371);
+			this->textBox_sample_size->Location = System::Drawing::Point(167, 371);
 			this->textBox_sample_size->Name = L"textBox_sample_size";
 			this->textBox_sample_size->Size = System::Drawing::Size(48, 20);
 			this->textBox_sample_size->TabIndex = 11;
@@ -177,7 +165,7 @@ namespace Graph {
 			// 
 			this->button1->Location = System::Drawing::Point(12, 397);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(153, 23);
+			this->button1->Size = System::Drawing::Size(203, 23);
 			this->button1->TabIndex = 12;
 			this->button1->Text = L"Сгенерировать выборку";
 			this->button1->UseVisualStyleBackColor = true;
@@ -185,7 +173,7 @@ namespace Graph {
 			// 
 			// textBox_sample_range
 			// 
-			this->textBox_sample_range->Location = System::Drawing::Point(269, 120);
+			this->textBox_sample_range->Location = System::Drawing::Point(319, 120);
 			this->textBox_sample_range->Name = L"textBox_sample_range";
 			this->textBox_sample_range->ReadOnly = true;
 			this->textBox_sample_range->Size = System::Drawing::Size(160, 20);
@@ -199,7 +187,7 @@ namespace Graph {
 				this->Column0,
 					this->Column1, this->Column2, this->Column3
 			});
-			this->dataGridView2->Location = System::Drawing::Point(171, 12);
+			this->dataGridView2->Location = System::Drawing::Point(221, 12);
 			this->dataGridView2->Name = L"dataGridView2";
 			this->dataGridView2->RowHeadersVisible = false;
 			this->dataGridView2->Size = System::Drawing::Size(468, 102);
@@ -214,18 +202,18 @@ namespace Graph {
 			// 
 			// Column1
 			// 
-			dataGridViewCellStyle10->Alignment = System::Windows::Forms::DataGridViewContentAlignment::TopRight;
-			dataGridViewCellStyle10->Font = (gcnew System::Drawing::Font(L"Consolas", 9));
-			this->Column1->DefaultCellStyle = dataGridViewCellStyle10;
+			dataGridViewCellStyle1->Alignment = System::Windows::Forms::DataGridViewContentAlignment::TopRight;
+			dataGridViewCellStyle1->Font = (gcnew System::Drawing::Font(L"Consolas", 9));
+			this->Column1->DefaultCellStyle = dataGridViewCellStyle1;
 			this->Column1->HeaderText = L"Теоретические характеристики";
 			this->Column1->Name = L"Column1";
 			this->Column1->ReadOnly = true;
 			// 
 			// Column2
 			// 
-			dataGridViewCellStyle11->Alignment = System::Windows::Forms::DataGridViewContentAlignment::TopRight;
-			dataGridViewCellStyle11->Font = (gcnew System::Drawing::Font(L"Consolas", 9));
-			this->Column2->DefaultCellStyle = dataGridViewCellStyle11;
+			dataGridViewCellStyle2->Alignment = System::Windows::Forms::DataGridViewContentAlignment::TopRight;
+			dataGridViewCellStyle2->Font = (gcnew System::Drawing::Font(L"Consolas", 9));
+			this->Column2->DefaultCellStyle = dataGridViewCellStyle2;
 			this->Column2->HeaderText = L"Выборочные характеристики";
 			this->Column2->Name = L"Column2";
 			this->Column2->ReadOnly = true;
@@ -233,9 +221,9 @@ namespace Graph {
 			// 
 			// Column3
 			// 
-			dataGridViewCellStyle12->Alignment = System::Windows::Forms::DataGridViewContentAlignment::TopRight;
-			dataGridViewCellStyle12->Font = (gcnew System::Drawing::Font(L"Consolas", 9));
-			this->Column3->DefaultCellStyle = dataGridViewCellStyle12;
+			dataGridViewCellStyle3->Alignment = System::Windows::Forms::DataGridViewContentAlignment::TopRight;
+			dataGridViewCellStyle3->Font = (gcnew System::Drawing::Font(L"Consolas", 9));
+			this->Column3->DefaultCellStyle = dataGridViewCellStyle3;
 			this->Column3->HeaderText = L"Отклонение";
 			this->Column3->Name = L"Column3";
 			this->Column3->ReadOnly = true;
@@ -244,45 +232,62 @@ namespace Graph {
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(171, 123);
+			this->label2->Location = System::Drawing::Point(221, 123);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(92, 13);
 			this->label2->TabIndex = 30;
 			this->label2->Text = L"Размах выборки";
 			// 
-			// chart1
-			// 
-			chartArea4->Name = L"ChartArea1";
-			this->chart1->ChartAreas->Add(chartArea4);
-			legend4->Name = L"Legend1";
-			this->chart1->Legends->Add(legend4);
-			this->chart1->Location = System::Drawing::Point(725, 23);
-			this->chart1->Name = L"chart1";
-			series4->ChartArea = L"ChartArea1";
-			series4->Legend = L"Legend1";
-			series4->Name = L"Series1";
-			this->chart1->Series->Add(series4);
-			this->chart1->Size = System::Drawing::Size(300, 300);
-			this->chart1->TabIndex = 31;
-			this->chart1->Text = L"chart1";
-			// 
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11));
-			this->label3->Location = System::Drawing::Point(12, 426);
+			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10));
+			this->label3->Location = System::Drawing::Point(37, 423);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(161, 18);
+			this->label3->Size = System::Drawing::Size(151, 17);
 			this->label3->TabIndex = 32;
 			this->label3->Text = L"f(x) = L/2 * exp(- L * |x|)";
+			// 
+			// N
+			// 
+			this->N->HeaderText = L"№";
+			this->N->Name = L"N";
+			this->N->ReadOnly = true;
+			this->N->Width = 50;
+			// 
+			// xi_sample
+			// 
+			this->xi_sample->HeaderText = L"Значение";
+			this->xi_sample->Name = L"xi_sample";
+			this->xi_sample->ReadOnly = true;
+			this->xi_sample->Width = 150;
+			// 
+			// label4
+			// 
+			this->label4->AutoSize = true;
+			this->label4->Location = System::Drawing::Point(508, 123);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(15, 13);
+			this->label4->TabIndex = 34;
+			this->label4->Text = L"D";
+			// 
+			// textBox_D
+			// 
+			this->textBox_D->Location = System::Drawing::Point(529, 120);
+			this->textBox_D->Name = L"textBox_D";
+			this->textBox_D->ReadOnly = true;
+			this->textBox_D->Size = System::Drawing::Size(160, 20);
+			this->textBox_D->TabIndex = 33;
+			this->textBox_D->Text = L"0";
 			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1096, 497);
+			this->ClientSize = System::Drawing::Size(1143, 586);
+			this->Controls->Add(this->label4);
+			this->Controls->Add(this->textBox_D);
 			this->Controls->Add(this->label3);
-			this->Controls->Add(this->chart1);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->dataGridView2);
 			this->Controls->Add(this->textBox_sample_range);
@@ -297,7 +302,6 @@ namespace Graph {
 			this->Text = L"Вариант 11";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -341,16 +345,25 @@ namespace Graph {
 		textBox_sample_range->Text = s;
 		*/
 		textBox_sample_range->Text = Convert::ToString(xi.get_sample_range());
+		textBox_D->Text = Convert::ToString(xi.CDF_difference());
 
 		double x_min = -5, x_max = 5, x_cur = x_min, h = 0.1;
 		PointPairList^ CDF_point_list = gcnew ZedGraph::PointPairList();
 		PointPairList^ sample_CDF_point_list = gcnew ZedGraph::PointPairList();
 		while (x_cur < x_max) {
 			CDF_point_list->Add(x_cur, xi.cumulative_distribution_function(x_cur));
-			sample_CDF_point_list->Add(x_cur, xi.sample_cumulative_distribution_function(x_cur));
 			x_cur += h;
 		}
+		sample_CDF_point_list->Add(-100, 0);
+		for (int i = 0; i < xi.get_sample_size(); i++) {
+			sample_CDF_point_list->Add(xi.get_sample(i) - 0.0000001, xi.sample_cumulative_distribution_function(xi.get_sample(i) - 0.0000001));
+			sample_CDF_point_list->Add(xi.get_sample(i) + 0.0000001, xi.sample_cumulative_distribution_function(xi.get_sample(i) + 0.0000001));
+		}
+		sample_CDF_point_list->Add(100, 1);
 		GraphPane^ panel = zedGraphControl1->GraphPane;
+		panel->Title->Text = "График функций распределения";
+		panel->XAxis->Title->Text = "Случайная величина";
+		panel->YAxis->Title->Text = "Вероятность / частота";
 		panel->CurveList->Clear();
 		LineItem^ Curve_CDF = panel->AddCurve("Функция распределения", CDF_point_list, Color::Red, SymbolType::None);
 		LineItem^ Curve_sample_CDF = panel->AddCurve("Выборочная функция распределения", sample_CDF_point_list, Color::Blue, SymbolType::None);
