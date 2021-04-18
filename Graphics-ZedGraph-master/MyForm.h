@@ -59,6 +59,17 @@ namespace Graph {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ xi_sample;
 	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::TextBox^ textBox_D;
+	private: System::Windows::Forms::DataGridView^ dataGridView_Histogram;
+
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ dataGridViewTextBoxColumn1;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ dataGridViewTextBoxColumn2;
+	private: ZedGraph::ZedGraphControl^ zedGraphControl_Histogram;
+	private: System::Windows::Forms::Button^ button_Histogram;
+
+
+
+
+
 	protected:
 	private: System::ComponentModel::IContainer^  components;
 	private:
@@ -79,6 +90,8 @@ namespace Graph {
 			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle3 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			this->zedGraphControl1 = (gcnew ZedGraph::ZedGraphControl());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->N = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->xi_sample = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->textBox_lambda = (gcnew System::Windows::Forms::TextBox());
 			this->textBox_sample_size = (gcnew System::Windows::Forms::TextBox());
@@ -93,17 +106,21 @@ namespace Graph {
 			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->N = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->xi_sample = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->textBox_D = (gcnew System::Windows::Forms::TextBox());
+			this->dataGridView_Histogram = (gcnew System::Windows::Forms::DataGridView());
+			this->dataGridViewTextBoxColumn1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->dataGridViewTextBoxColumn2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->zedGraphControl_Histogram = (gcnew ZedGraph::ZedGraphControl());
+			this->button_Histogram = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView_Histogram))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// zedGraphControl1
 			// 
-			this->zedGraphControl1->Location = System::Drawing::Point(221, 146);
+			this->zedGraphControl1->Location = System::Drawing::Point(708, 12);
 			this->zedGraphControl1->Name = L"zedGraphControl1";
 			this->zedGraphControl1->ScrollGrace = 0;
 			this->zedGraphControl1->ScrollMaxX = 0;
@@ -112,7 +129,7 @@ namespace Graph {
 			this->zedGraphControl1->ScrollMinX = 0;
 			this->zedGraphControl1->ScrollMinY = 0;
 			this->zedGraphControl1->ScrollMinY2 = 0;
-			this->zedGraphControl1->Size = System::Drawing::Size(913, 428);
+			this->zedGraphControl1->Size = System::Drawing::Size(1184, 444);
 			this->zedGraphControl1->TabIndex = 0;
 			this->zedGraphControl1->Load += gcnew System::EventHandler(this, &MyForm::zedGraphControl1_Load);
 			// 
@@ -123,14 +140,28 @@ namespace Graph {
 			this->dataGridView1->Location = System::Drawing::Point(12, 12);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->RowHeadersVisible = false;
-			this->dataGridView1->Size = System::Drawing::Size(203, 327);
+			this->dataGridView1->Size = System::Drawing::Size(203, 343);
 			this->dataGridView1->TabIndex = 2;
 			this->dataGridView1->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView1_CellContentClick);
+			// 
+			// N
+			// 
+			this->N->HeaderText = L"№";
+			this->N->Name = L"N";
+			this->N->ReadOnly = true;
+			this->N->Width = 50;
+			// 
+			// xi_sample
+			// 
+			this->xi_sample->HeaderText = L"Значение";
+			this->xi_sample->Name = L"xi_sample";
+			this->xi_sample->ReadOnly = true;
+			this->xi_sample->Width = 150;
 			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(12, 348);
+			this->label1->Location = System::Drawing::Point(12, 364);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(47, 13);
 			this->label1->TabIndex = 3;
@@ -138,7 +169,7 @@ namespace Graph {
 			// 
 			// textBox_lambda
 			// 
-			this->textBox_lambda->Location = System::Drawing::Point(167, 345);
+			this->textBox_lambda->Location = System::Drawing::Point(167, 361);
 			this->textBox_lambda->Name = L"textBox_lambda";
 			this->textBox_lambda->Size = System::Drawing::Size(48, 20);
 			this->textBox_lambda->TabIndex = 4;
@@ -146,7 +177,7 @@ namespace Graph {
 			// 
 			// textBox_sample_size
 			// 
-			this->textBox_sample_size->Location = System::Drawing::Point(167, 371);
+			this->textBox_sample_size->Location = System::Drawing::Point(167, 387);
 			this->textBox_sample_size->Name = L"textBox_sample_size";
 			this->textBox_sample_size->Size = System::Drawing::Size(48, 20);
 			this->textBox_sample_size->TabIndex = 11;
@@ -155,7 +186,7 @@ namespace Graph {
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(12, 374);
+			this->label5->Location = System::Drawing::Point(12, 390);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(93, 13);
 			this->label5->TabIndex = 10;
@@ -163,11 +194,11 @@ namespace Graph {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(12, 397);
+			this->button1->Location = System::Drawing::Point(12, 413);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(203, 23);
 			this->button1->TabIndex = 12;
-			this->button1->Text = L"Сгенерировать выборку";
+			this->button1->Text = L"Сделать всё";
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &MyForm::button1_Click_1);
 			// 
@@ -242,25 +273,11 @@ namespace Graph {
 			// 
 			this->label3->AutoSize = true;
 			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10));
-			this->label3->Location = System::Drawing::Point(37, 423);
+			this->label3->Location = System::Drawing::Point(34, 439);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(151, 17);
 			this->label3->TabIndex = 32;
 			this->label3->Text = L"f(x) = L/2 * exp(- L * |x|)";
-			// 
-			// N
-			// 
-			this->N->HeaderText = L"№";
-			this->N->Name = L"N";
-			this->N->ReadOnly = true;
-			this->N->Width = 50;
-			// 
-			// xi_sample
-			// 
-			this->xi_sample->HeaderText = L"Значение";
-			this->xi_sample->Name = L"xi_sample";
-			this->xi_sample->ReadOnly = true;
-			this->xi_sample->Width = 150;
 			// 
 			// label4
 			// 
@@ -280,11 +297,64 @@ namespace Graph {
 			this->textBox_D->TabIndex = 33;
 			this->textBox_D->Text = L"0";
 			// 
+			// dataGridView_Histogram
+			// 
+			this->dataGridView_Histogram->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView_Histogram->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(2) {
+				this->dataGridViewTextBoxColumn1,
+					this->dataGridViewTextBoxColumn2
+			});
+			this->dataGridView_Histogram->Location = System::Drawing::Point(12, 462);
+			this->dataGridView_Histogram->Name = L"dataGridView_Histogram";
+			this->dataGridView_Histogram->RowHeadersVisible = false;
+			this->dataGridView_Histogram->Size = System::Drawing::Size(203, 415);
+			this->dataGridView_Histogram->TabIndex = 35;
+			// 
+			// dataGridViewTextBoxColumn1
+			// 
+			this->dataGridViewTextBoxColumn1->HeaderText = L"№";
+			this->dataGridViewTextBoxColumn1->Name = L"dataGridViewTextBoxColumn1";
+			this->dataGridViewTextBoxColumn1->ReadOnly = true;
+			this->dataGridViewTextBoxColumn1->Width = 50;
+			// 
+			// dataGridViewTextBoxColumn2
+			// 
+			this->dataGridViewTextBoxColumn2->HeaderText = L"Граница";
+			this->dataGridViewTextBoxColumn2->Name = L"dataGridViewTextBoxColumn2";
+			this->dataGridViewTextBoxColumn2->Width = 150;
+			// 
+			// zedGraphControl_Histogram
+			// 
+			this->zedGraphControl_Histogram->Location = System::Drawing::Point(708, 462);
+			this->zedGraphControl_Histogram->Name = L"zedGraphControl_Histogram";
+			this->zedGraphControl_Histogram->ScrollGrace = 0;
+			this->zedGraphControl_Histogram->ScrollMaxX = 0;
+			this->zedGraphControl_Histogram->ScrollMaxY = 0;
+			this->zedGraphControl_Histogram->ScrollMaxY2 = 0;
+			this->zedGraphControl_Histogram->ScrollMinX = 0;
+			this->zedGraphControl_Histogram->ScrollMinY = 0;
+			this->zedGraphControl_Histogram->ScrollMinY2 = 0;
+			this->zedGraphControl_Histogram->Size = System::Drawing::Size(1184, 444);
+			this->zedGraphControl_Histogram->TabIndex = 36;
+			// 
+			// button_Histogram
+			// 
+			this->button_Histogram->Location = System::Drawing::Point(12, 883);
+			this->button_Histogram->Name = L"button_Histogram";
+			this->button_Histogram->Size = System::Drawing::Size(203, 23);
+			this->button_Histogram->TabIndex = 37;
+			this->button_Histogram->Text = L"Сделать ничего";
+			this->button_Histogram->UseVisualStyleBackColor = true;
+			this->button_Histogram->Click += gcnew System::EventHandler(this, &MyForm::button_Histogram_Click);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1143, 586);
+			this->ClientSize = System::Drawing::Size(1904, 1041);
+			this->Controls->Add(this->button_Histogram);
+			this->Controls->Add(this->zedGraphControl_Histogram);
+			this->Controls->Add(this->dataGridView_Histogram);
 			this->Controls->Add(this->label4);
 			this->Controls->Add(this->textBox_D);
 			this->Controls->Add(this->label3);
@@ -302,6 +372,7 @@ namespace Graph {
 			this->Text = L"Вариант 11";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView_Histogram))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -311,7 +382,6 @@ namespace Graph {
 		Random_Variable xi;
 		int sample_size = Convert::ToInt32(textBox_sample_size->Text); //толчно Int32?
 		double lambda = Convert::ToDouble(textBox_lambda->Text);
-
 		xi.set_parameter(lambda);
 		xi.generate_sample(sample_size);
 
@@ -369,10 +439,48 @@ namespace Graph {
 		LineItem^ Curve_sample_CDF = panel->AddCurve("Выборочная функция распределения", sample_CDF_point_list, Color::Blue, SymbolType::None);
 		zedGraphControl1->Invalidate();
 
+		//histogram
+
+		PointPairList^ PD_point_list = gcnew ZedGraph::PointPairList();
+		PointPairList^ histogram_point_list = gcnew ZedGraph::PointPairList();
+
+		x_min = -10;
+		x_max = 10;
+		x_cur = x_min;
+		h = 0.1;
+		while (x_cur < x_max) {
+			PD_point_list->Add(x_cur, xi.probability_density(x_cur));
+			x_cur += h;
+		}
+
+		double left = Convert::ToDouble(dataGridView_Histogram->Rows[0]->Cells[1]->Value);
+		double right;
+		for (int i = 0; i < dataGridView_Histogram->RowCount - 2; i++) {
+			left  = Convert::ToDouble(dataGridView_Histogram->Rows[i]->Cells[1]->Value);
+			right = Convert::ToDouble(dataGridView_Histogram->Rows[i + 1]->Cells[1]->Value);
+
+			histogram_point_list->Add(left, 0);
+			histogram_point_list->Add(left,  (xi.sample_cumulative_distribution_function(right) - xi.sample_cumulative_distribution_function(left)) / (right - left));
+			histogram_point_list->Add(right, (xi.sample_cumulative_distribution_function(right) - xi.sample_cumulative_distribution_function(left)) / (right - left));
+		}
+		histogram_point_list->Add(right, 0);
+
+		GraphPane^ panel2 = zedGraphControl_Histogram->GraphPane;
+		panel2->Title->Text = "Гистограмма";
+		panel2->XAxis->Title->Text = "Случайная величина";
+		panel2->YAxis->Title->Text = "Плотность вероятности / частоты";
+
+		panel2->CurveList->Clear();
+		LineItem^ Curve_PD = panel2->AddCurve("Функция плотности веротяности", PD_point_list, Color::Red, SymbolType::None);
+		LineItem^ Curve_histogram = panel2->AddCurve("Гистограмма", histogram_point_list, Color::Blue, SymbolType::None);
+
+		zedGraphControl_Histogram->Invalidate();
 	}
 	private: System::Void zedGraphControl1_Load(System::Object^  sender, System::EventArgs^  e) {
 	}
 	private: System::Void dataGridView1_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+	}
+	private: System::Void button_Histogram_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
 };
 }

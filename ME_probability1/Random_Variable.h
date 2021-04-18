@@ -33,9 +33,10 @@ public:
         sample_range = 0;
     }
 
+    double inverse_probability(double);
+    double probability_density(double);
     double cumulative_distribution_function(double);
     double sample_cumulative_distribution_function(double);
-    double inverse_probability(double);
     double CDF_difference();
 
     void set_parameter(double);
@@ -87,6 +88,10 @@ inline double Random_Variable::inverse_probability(double x){
     }
     else
         throw 0;
+}
+
+inline double Random_Variable::probability_density(double x){
+    return 0.5 * parameter * exp(- parameter * abs(x));
 }
 
 inline double Random_Variable::CDF_difference(){
