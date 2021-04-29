@@ -127,20 +127,22 @@ void Random_Variable::generate_sample(int size) {
 
     //дисперсия
     sample_variance = 0;
-    for (int i = 0; i < size; i++) {
-        double s = sample[i];
-        sample_variance += (s - sample_mean) * (s - sample_mean);
+    if (sample.size() != 1) {
+        for (int i = 0; i < size; i++) {
+            double s = sample[i];
+            sample_variance += (s - sample_mean) * (s - sample_mean);
+        }
+        sample_variance /= (size - 1);
     }
-    sample_variance /= (size - 1);
 
     std::sort(sample.begin(), sample.end());
 
     //медиана выборки
-    if (size % 2) {
-        sample_median = 0.5 * (sample[size / 2] + sample[size / 2 + 1]);
+    if (size % 2 == 0) {
+        sample_median = 0.5 * (sample[size / 2 - 1] + sample[size / 2]);
     }
     else {
-        sample_median = sample[size / 2 + 1];
+        sample_median = sample[size / 2];
     }
 
     //размах выборки
