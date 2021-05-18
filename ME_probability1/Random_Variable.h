@@ -41,6 +41,8 @@ public:
 
     void set_parameter(double);
     void generate_sample(int);
+    void add_sample(double);
+    void check_n_sort();
 
 
     double get_mean();
@@ -68,7 +70,7 @@ inline double Random_Variable::sample_cumulative_distribution_function(double x)
         return 1;
     int L = 0;
     int R = sample.size() - 1;
-    int m;
+    int m = 0.5 * (R + L);
     while (!(sample[m] <= x && x <= sample[m + 1])) {
         m = (L + R) / 2;
         if (x < sample[m])
@@ -122,6 +124,44 @@ void Random_Variable::generate_sample(int size) {
         double rnd = inverse_probability(urd(gen));
         sample[i] = rnd;
         sample_mean += rnd;
+    }
+    sample_mean /= size;
+
+    //дисперсия
+    sample_variance = 0;
+    if (sample.size() != 1) {
+        for (int i = 0; i < size; i++) {
+            double s = sample[i];
+            sample_variance += (s - sample_mean) * (s - sample_mean);
+        }
+        sample_variance /= (size - 1);
+    }
+
+    std::sort(sample.begin(), sample.end());
+
+    //медиана выборки
+    if (size % 2 == 0) {
+        sample_median = 0.5 * (sample[size / 2 - 1] + sample[size / 2]);
+    }
+    else {
+        sample_median = sample[size / 2];
+    }
+
+    //размах выборки
+    sample_range = sample[size - 1] - sample[0];
+}
+
+inline void Random_Variable::add_sample(double a){
+    sample.push_back(a);
+}
+
+inline void Random_Variable::check_n_sort(){
+
+    int size = sample.size();
+    //генерируем выборку и сразу считаем среднее
+    sample_mean = 0;
+    for (int i = 0; i < size; i++) {
+        sample_mean += sample[i];
     }
     sample_mean /= size;
 

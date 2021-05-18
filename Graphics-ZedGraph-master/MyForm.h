@@ -73,6 +73,17 @@ namespace Graph {
 	private: System::Windows::Forms::TextBox^ textBox_max_histogram_error;
 	private: System::Windows::Forms::Label^ label6;
 	private: System::Windows::Forms::Button^ button2;
+	private: System::Windows::Forms::DataGridView^ dataGridView_hypothesis;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ dataGridViewTextBoxColumn6;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ dataGridViewTextBoxColumn7;
+	private: System::Windows::Forms::Label^ label7;
+	private: System::Windows::Forms::TextBox^ textBox_hypothesis;
+	private: System::Windows::Forms::Button^ button3;
+	private: System::Windows::Forms::TextBox^ textBox_F;
+	private: System::Windows::Forms::Label^ label8;
+	private: System::Windows::Forms::TextBox^ textBox1;
+	private: System::Windows::Forms::Label^ label9;
+	private: System::Windows::Forms::TextBox^ textBox_R_0;
 
 
 
@@ -131,10 +142,22 @@ namespace Graph {
 			this->textBox_max_histogram_error = (gcnew System::Windows::Forms::TextBox());
 			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->dataGridView_hypothesis = (gcnew System::Windows::Forms::DataGridView());
+			this->dataGridViewTextBoxColumn6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->dataGridViewTextBoxColumn7 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->label7 = (gcnew System::Windows::Forms::Label());
+			this->textBox_hypothesis = (gcnew System::Windows::Forms::TextBox());
+			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->textBox_F = (gcnew System::Windows::Forms::TextBox());
+			this->label8 = (gcnew System::Windows::Forms::Label());
+			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->label9 = (gcnew System::Windows::Forms::Label());
+			this->textBox_R_0 = (gcnew System::Windows::Forms::TextBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView_Histogram))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView_Histogram_table))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView_hypothesis))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// zedGraphControl1
@@ -326,7 +349,7 @@ namespace Graph {
 			this->dataGridView_Histogram->Location = System::Drawing::Point(12, 462);
 			this->dataGridView_Histogram->Name = L"dataGridView_Histogram";
 			this->dataGridView_Histogram->RowHeadersVisible = false;
-			this->dataGridView_Histogram->Size = System::Drawing::Size(203, 421);
+			this->dataGridView_Histogram->Size = System::Drawing::Size(203, 444);
 			this->dataGridView_Histogram->TabIndex = 35;
 			// 
 			// dataGridViewTextBoxColumn1
@@ -344,7 +367,7 @@ namespace Graph {
 			// 
 			// zedGraphControl_Histogram
 			// 
-			this->zedGraphControl_Histogram->Location = System::Drawing::Point(708, 462);
+			this->zedGraphControl_Histogram->Location = System::Drawing::Point(917, 462);
 			this->zedGraphControl_Histogram->Name = L"zedGraphControl_Histogram";
 			this->zedGraphControl_Histogram->ScrollGrace = 0;
 			this->zedGraphControl_Histogram->ScrollMaxX = 0;
@@ -353,12 +376,12 @@ namespace Graph {
 			this->zedGraphControl_Histogram->ScrollMinX = 0;
 			this->zedGraphControl_Histogram->ScrollMinY = 0;
 			this->zedGraphControl_Histogram->ScrollMinY2 = 0;
-			this->zedGraphControl_Histogram->Size = System::Drawing::Size(1184, 444);
+			this->zedGraphControl_Histogram->Size = System::Drawing::Size(975, 444);
 			this->zedGraphControl_Histogram->TabIndex = 36;
 			// 
 			// button_Histogram
 			// 
-			this->button_Histogram->Location = System::Drawing::Point(12, 889);
+			this->button_Histogram->Location = System::Drawing::Point(12, 912);
 			this->button_Histogram->Name = L"button_Histogram";
 			this->button_Histogram->Size = System::Drawing::Size(149, 36);
 			this->button_Histogram->TabIndex = 37;
@@ -376,7 +399,7 @@ namespace Graph {
 			this->dataGridView_Histogram_table->Location = System::Drawing::Point(221, 462);
 			this->dataGridView_Histogram_table->Name = L"dataGridView_Histogram_table";
 			this->dataGridView_Histogram_table->RowHeadersVisible = false;
-			this->dataGridView_Histogram_table->Size = System::Drawing::Size(481, 421);
+			this->dataGridView_Histogram_table->Size = System::Drawing::Size(481, 444);
 			this->dataGridView_Histogram_table->TabIndex = 38;
 			// 
 			// dataGridViewTextBoxColumn3
@@ -408,7 +431,7 @@ namespace Graph {
 			// 
 			// textBox_Histogram_cols
 			// 
-			this->textBox_Histogram_cols->Location = System::Drawing::Point(167, 898);
+			this->textBox_Histogram_cols->Location = System::Drawing::Point(167, 921);
 			this->textBox_Histogram_cols->Name = L"textBox_Histogram_cols";
 			this->textBox_Histogram_cols->Size = System::Drawing::Size(48, 20);
 			this->textBox_Histogram_cols->TabIndex = 39;
@@ -416,7 +439,7 @@ namespace Graph {
 			// 
 			// textBox_max_histogram_error
 			// 
-			this->textBox_max_histogram_error->Location = System::Drawing::Point(542, 886);
+			this->textBox_max_histogram_error->Location = System::Drawing::Point(542, 912);
 			this->textBox_max_histogram_error->Name = L"textBox_max_histogram_error";
 			this->textBox_max_histogram_error->ReadOnly = true;
 			this->textBox_max_histogram_error->Size = System::Drawing::Size(160, 20);
@@ -426,7 +449,7 @@ namespace Graph {
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Location = System::Drawing::Point(389, 889);
+			this->label6->Location = System::Drawing::Point(389, 915);
 			this->label6->Name = L"label6";
 			this->label6->Size = System::Drawing::Size(147, 13);
 			this->label6->TabIndex = 41;
@@ -434,7 +457,7 @@ namespace Graph {
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(12, 931);
+			this->button2->Location = System::Drawing::Point(12, 954);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(149, 36);
 			this->button2->TabIndex = 42;
@@ -442,11 +465,115 @@ namespace Graph {
 			this->button2->UseVisualStyleBackColor = true;
 			this->button2->Click += gcnew System::EventHandler(this, &MyForm::button2_Click);
 			// 
+			// dataGridView_hypothesis
+			// 
+			this->dataGridView_hypothesis->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView_hypothesis->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(2) {
+				this->dataGridViewTextBoxColumn6,
+					this->dataGridViewTextBoxColumn7
+			});
+			this->dataGridView_hypothesis->Location = System::Drawing::Point(708, 462);
+			this->dataGridView_hypothesis->Name = L"dataGridView_hypothesis";
+			this->dataGridView_hypothesis->RowHeadersVisible = false;
+			this->dataGridView_hypothesis->Size = System::Drawing::Size(203, 444);
+			this->dataGridView_hypothesis->TabIndex = 43;
+			// 
+			// dataGridViewTextBoxColumn6
+			// 
+			this->dataGridViewTextBoxColumn6->HeaderText = L"j";
+			this->dataGridViewTextBoxColumn6->Name = L"dataGridViewTextBoxColumn6";
+			this->dataGridViewTextBoxColumn6->ReadOnly = true;
+			this->dataGridViewTextBoxColumn6->Width = 50;
+			// 
+			// dataGridViewTextBoxColumn7
+			// 
+			this->dataGridViewTextBoxColumn7->HeaderText = L"q_j";
+			this->dataGridViewTextBoxColumn7->Name = L"dataGridViewTextBoxColumn7";
+			this->dataGridViewTextBoxColumn7->Width = 150;
+			// 
+			// label7
+			// 
+			this->label7->AutoSize = true;
+			this->label7->Location = System::Drawing::Point(393, 943);
+			this->label7->Name = L"label7";
+			this->label7->Size = System::Drawing::Size(114, 13);
+			this->label7->TabIndex = 44;
+			this->label7->Text = L"Уровень значимости";
+			// 
+			// textBox_hypothesis
+			// 
+			this->textBox_hypothesis->Location = System::Drawing::Point(513, 940);
+			this->textBox_hypothesis->Name = L"textBox_hypothesis";
+			this->textBox_hypothesis->Size = System::Drawing::Size(48, 20);
+			this->textBox_hypothesis->TabIndex = 45;
+			this->textBox_hypothesis->Text = L"0,9";
+			// 
+			// button3
+			// 
+			this->button3->Location = System::Drawing::Point(567, 938);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(135, 23);
+			this->button3->TabIndex = 46;
+			this->button3->Text = L"Проверить гипотезу";
+			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &MyForm::button3_Click);
+			// 
+			// textBox_F
+			// 
+			this->textBox_F->Location = System::Drawing::Point(513, 966);
+			this->textBox_F->Name = L"textBox_F";
+			this->textBox_F->ReadOnly = true;
+			this->textBox_F->Size = System::Drawing::Size(48, 20);
+			this->textBox_F->TabIndex = 47;
+			// 
+			// label8
+			// 
+			this->label8->AutoSize = true;
+			this->label8->Location = System::Drawing::Point(453, 969);
+			this->label8->Name = L"label8";
+			this->label8->Size = System::Drawing::Size(54, 13);
+			this->label8->TabIndex = 48;
+			this->label8->Text = L"1 - F(R_0)";
+			// 
+			// textBox1
+			// 
+			this->textBox1->Location = System::Drawing::Point(567, 967);
+			this->textBox1->Name = L"textBox1";
+			this->textBox1->ReadOnly = true;
+			this->textBox1->Size = System::Drawing::Size(135, 20);
+			this->textBox1->TabIndex = 49;
+			// 
+			// label9
+			// 
+			this->label9->AutoSize = true;
+			this->label9->Location = System::Drawing::Point(366, 970);
+			this->label9->Name = L"label9";
+			this->label9->Size = System::Drawing::Size(27, 13);
+			this->label9->TabIndex = 51;
+			this->label9->Text = L"R_0";
+			// 
+			// textBox_R_0
+			// 
+			this->textBox_R_0->Location = System::Drawing::Point(399, 967);
+			this->textBox_R_0->Name = L"textBox_R_0";
+			this->textBox_R_0->ReadOnly = true;
+			this->textBox_R_0->Size = System::Drawing::Size(48, 20);
+			this->textBox_R_0->TabIndex = 50;
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1904, 1041);
+			this->Controls->Add(this->label9);
+			this->Controls->Add(this->textBox_R_0);
+			this->Controls->Add(this->textBox1);
+			this->Controls->Add(this->label8);
+			this->Controls->Add(this->textBox_F);
+			this->Controls->Add(this->button3);
+			this->Controls->Add(this->textBox_hypothesis);
+			this->Controls->Add(this->label7);
+			this->Controls->Add(this->dataGridView_hypothesis);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->label6);
 			this->Controls->Add(this->textBox_max_histogram_error);
@@ -474,6 +601,7 @@ namespace Graph {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView_Histogram))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView_Histogram_table))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView_hypothesis))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -527,8 +655,9 @@ namespace Graph {
 		}
 		sample_CDF_point_list->Add(-100, 0);
 		for (int i = 0; i < xi.get_sample_size(); i++) {
-			sample_CDF_point_list->Add(xi.get_sample(i) - 0.0000001, xi.sample_cumulative_distribution_function(xi.get_sample(i) - 0.0000001));
-			sample_CDF_point_list->Add(xi.get_sample(i) + 0.0000001, xi.sample_cumulative_distribution_function(xi.get_sample(i) + 0.0000001));
+			double a = xi.get_sample(i);
+			sample_CDF_point_list->Add(a - 0.0000001, xi.sample_cumulative_distribution_function(a - 0.0000001));
+			sample_CDF_point_list->Add(a + 0.0000001, xi.sample_cumulative_distribution_function(a + 0.0000001));
 		}
 		sample_CDF_point_list->Add(100, 1);
 		GraphPane^ panel = zedGraphControl1->GraphPane;
@@ -622,6 +751,71 @@ namespace Graph {
 		}
 		dataGridView_Histogram->Rows->Add();
 		dataGridView_Histogram->Rows[n]->Cells[1]->Value = Convert::ToDouble(x_max);
+
+	}
+	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+		Random_Variable xi;
+		int n = dataGridView_Histogram->Rows->Count - 1;
+
+		for (int i = 0; i < dataGridView1->Rows->Count; i++) {
+			xi.add_sample(Convert::ToDouble(dataGridView1->Rows[i]->Cells[1]->Value));
+		}
+		xi.check_n_sort();
+		double right, left, q_j, R_0 = 0;
+		int n_j;
+		int sample_size = dataGridView1->Rows->Count - 1;
+
+		left = Convert::ToDouble(dataGridView_Histogram->Rows[0]->Cells[1]->Value);
+
+		dataGridView_hypothesis->Rows->Clear();
+
+		q_j = xi.cumulative_distribution_function(left);
+		n_j = sample_size * xi.sample_cumulative_distribution_function(left);
+
+		dataGridView_hypothesis->Rows->Add();
+		dataGridView_hypothesis->Rows[0]->Cells[0]->Value = 0;
+		dataGridView_hypothesis->Rows[0]->Cells[1]->Value = Convert::ToDouble(q_j);
+
+		R_0 += (n_j - sample_size * q_j) * (n_j - sample_size * q_j) / (sample_size * q_j);
+
+		for (int j = 1; j < n; j++) {
+			left  = Convert::ToDouble(dataGridView_Histogram->Rows[j - 1]->Cells[1]->Value);
+			right = Convert::ToDouble(dataGridView_Histogram->Rows[j]->Cells[1]->Value);
+
+			q_j = xi.cumulative_distribution_function(right) - xi.cumulative_distribution_function(left);
+			n_j = sample_size * (xi.sample_cumulative_distribution_function(right) - xi.sample_cumulative_distribution_function(left));
+
+			dataGridView_hypothesis->Rows->Add();
+			dataGridView_hypothesis->Rows[j]->Cells[0]->Value = j;
+			dataGridView_hypothesis->Rows[j]->Cells[1]->Value = Convert::ToDouble(q_j);
+
+			R_0 += (n_j - sample_size * q_j) * (n_j - sample_size * q_j) / (sample_size * q_j);
+		}
+
+		q_j = 1 - xi.cumulative_distribution_function(right);
+		n_j = sample_size * (1 - xi.sample_cumulative_distribution_function(right));
+
+		dataGridView_hypothesis->Rows->Add();
+		dataGridView_hypothesis->Rows[n]->Cells[0]->Value = n + 1;
+		dataGridView_hypothesis->Rows[n]->Cells[1]->Value = Convert::ToDouble(q_j);
+
+		R_0 += (n_j - sample_size * q_j) * (n_j - sample_size * q_j) / (sample_size * q_j);
+		textBox_R_0->Text = Convert::ToString(R_0);
+
+
+		int N = 1000;
+		double F = 0;
+		double step = R_0 / N;
+		for (int i = 0; i < N; i ++ ) {
+			F += step * pow(2, -(n + 1) / 2) / tgamma((n + 1) / 2) * pow(i * step, (n + 1) / 2 - 1) * exp(-i * step / 2);
+		}
+		F = 1 - F;
+		textBox_F->Text = Convert::ToString(F);
+		if (F >= Convert::ToDouble(textBox_hypothesis->Text)) {
+			textBox1->Text = "Принять";
+		}
+		else
+			textBox1->Text = "Не принять";
 
 	}
 };
