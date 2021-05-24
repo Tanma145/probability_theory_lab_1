@@ -757,15 +757,19 @@ namespace Graph {
 		Random_Variable xi;
 		int n = dataGridView_Histogram->Rows->Count - 1;
 
-		for (int i = 0; i < dataGridView1->Rows->Count; i++) {
+		//копирует выборку дурацким образом
+		for (int i = 0; i < dataGridView1->Rows->Count - 1; i++) {
 			xi.add_sample(Convert::ToDouble(dataGridView1->Rows[i]->Cells[1]->Value));
 		}
 		xi.check_n_sort();
+
+		//
 		double right, left, q_j, R_0 = 0;
 		int n_j;
 		int sample_size = dataGridView1->Rows->Count - 1;
 
 		left = Convert::ToDouble(dataGridView_Histogram->Rows[0]->Cells[1]->Value);
+		right = Convert::ToDouble(dataGridView_Histogram->Rows[0]->Cells[1]->Value);
 
 		dataGridView_hypothesis->Rows->Clear();
 
@@ -776,10 +780,10 @@ namespace Graph {
 		dataGridView_hypothesis->Rows[0]->Cells[0]->Value = 0;
 		dataGridView_hypothesis->Rows[0]->Cells[1]->Value = Convert::ToDouble(q_j);
 
-		R_0 += (n_j - sample_size * q_j) * (n_j - sample_size * q_j) / (sample_size * q_j);
+		R_0 += pow((n_j - sample_size * q_j), 2) / (sample_size * q_j);
 
-		for (int j = 1; j < n; j++) {
-			left  = Convert::ToDouble(dataGridView_Histogram->Rows[j - 1]->Cells[1]->Value);
+		for (int j = 1; j < n - 1; j++) {
+			left = Convert::ToDouble(dataGridView_Histogram->Rows[j - 1]->Cells[1]->Value);
 			right = Convert::ToDouble(dataGridView_Histogram->Rows[j]->Cells[1]->Value);
 
 			q_j = xi.cumulative_distribution_function(right) - xi.cumulative_distribution_function(left);
@@ -789,28 +793,33 @@ namespace Graph {
 			dataGridView_hypothesis->Rows[j]->Cells[0]->Value = j;
 			dataGridView_hypothesis->Rows[j]->Cells[1]->Value = Convert::ToDouble(q_j);
 
-			R_0 += (n_j - sample_size * q_j) * (n_j - sample_size * q_j) / (sample_size * q_j);
+			R_0 += pow((n_j - sample_size * q_j), 2) / (sample_size * q_j);
 		}
 
 		q_j = 1 - xi.cumulative_distribution_function(right);
 		n_j = sample_size * (1 - xi.sample_cumulative_distribution_function(right));
 
 		dataGridView_hypothesis->Rows->Add();
-		dataGridView_hypothesis->Rows[n]->Cells[0]->Value = n + 1;
+		dataGridView_hypothesis->Rows[n]->Cells[0]->Value = n;
 		dataGridView_hypothesis->Rows[n]->Cells[1]->Value = Convert::ToDouble(q_j);
 
-		R_0 += (n_j - sample_size * q_j) * (n_j - sample_size * q_j) / (sample_size * q_j);
+		R_0 += pow((n_j - sample_size * q_j), 2) / (sample_size * q_j);
+
 		textBox_R_0->Text = Convert::ToString(R_0);
 
 
-		int N = 1000;
+		int N = 5000;
 		double F = 0;
 		double step = R_0 / N;
-		for (int i = 0; i < N; i ++ ) {
-			F += step * pow(2, -(n + 1) / 2) / tgamma((n + 1) / 2) * pow(i * step, (n + 1) / 2 - 1) * exp(-i * step / 2);
+		double r = n;
+		if (R_0 != 0) {
+			for (int i = 0; i < N; i++) {
+				F += step * pow(2, -r / 2.0) / tgamma(r / 2.0) * pow(i * step, r / 2.0 - 1) * exp(-i * step / 2.0);
+			}
 		}
 		F = 1 - F;
 		textBox_F->Text = Convert::ToString(F);
+
 		if (F >= Convert::ToDouble(textBox_hypothesis->Text)) {
 			textBox1->Text = "Принять";
 		}

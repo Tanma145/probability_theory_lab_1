@@ -36,7 +36,7 @@ public:
     double inverse_probability(double);
     double probability_density(double);
     double cumulative_distribution_function(double);
-    double sample_cumulative_distribution_function(double);
+    double sample_cumulative_distribution_function(double) const;
     double CDF_difference();
 
     void set_parameter(double);
@@ -63,7 +63,7 @@ inline double Random_Variable::cumulative_distribution_function(double x)
     else
         return 1 - 0.5 * exp(-x * parameter);
 }
-inline double Random_Variable::sample_cumulative_distribution_function(double x){
+inline double Random_Variable::sample_cumulative_distribution_function(double x) const{
     if (x < sample[0])
         return 0;
     if (x >= sample[sample.size() - 1])
@@ -71,6 +71,7 @@ inline double Random_Variable::sample_cumulative_distribution_function(double x)
     int L = 0;
     int R = sample.size() - 1;
     int m = 0.5 * (R + L);
+
     while (!(sample[m] <= x && x <= sample[m + 1])) {
         m = (L + R) / 2;
         if (x < sample[m])
