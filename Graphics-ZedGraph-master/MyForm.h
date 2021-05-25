@@ -1,5 +1,6 @@
 #pragma once
 #include <iomanip>
+#include <vector>
 #include "../ME_probability1/Random_Variable.h"
 
 namespace Graph {
@@ -622,6 +623,7 @@ namespace Graph {
 			dataGridView1->Rows[i]->Cells[1]->Value = xi.get_sample(i);
 		}
 
+		//характеристики случайной величины
 		dataGridView2->Rows->Clear();
 		dataGridView2->Rows->Add(2);
 		dataGridView2->Rows[0]->Cells[0]->Value = "Среднее";
@@ -690,9 +692,17 @@ namespace Graph {
 		double height;
 		double histogram_error;
 		double max_histogram_error = 0;
-		for (int i = 0; i < dataGridView_Histogram->RowCount - 2; i++) {
-			left  = Convert::ToDouble(dataGridView_Histogram->Rows[i]->Cells[1]->Value);
-			right = Convert::ToDouble(dataGridView_Histogram->Rows[i + 1]->Cells[1]->Value);
+		std::vector<double> histogram(dataGridView_Histogram->RowCount + 1);
+		histogram[0] = x_min;
+		for (int i = 0; i < dataGridView_Histogram->RowCount; i++)
+			histogram[i + 1] = Convert::ToDouble(dataGridView_Histogram->Rows[i]->Cells[1]->Value);
+		histogram[dataGridView_Histogram->RowCount] = x_max;
+
+
+		for (int i = 0; i < dataGridView_Histogram->RowCount; i++) {
+
+			left  = Convert::ToDouble(histogram[i]);
+			right = Convert::ToDouble(histogram[i + 1]);
 			z_j = 0.5 * (right + left);
 			height = (xi.sample_cumulative_distribution_function(right) - xi.sample_cumulative_distribution_function(left)) / (right - left);
 			dataGridView_Histogram_table->Rows->Add(); 
@@ -737,21 +747,15 @@ namespace Graph {
 		dataGridView_Histogram->Rows[n]->Cells[1]->Value = Convert::ToDouble(x_max);
 	}
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+		//создаёт равновероятностную отрезки
 		dataGridView_Histogram->Rows->Clear();
 		int n = Convert::ToDouble(textBox_Histogram_cols->Text);
 		Random_Variable xi;
 
-		double x_min = -10, x_max = 10;
-
-		dataGridView_Histogram->Rows->Add();
-		dataGridView_Histogram->Rows[0]->Cells[1]->Value = Convert::ToDouble(x_min);
-		for (int i = 1; i < n; i++) {
+		for (int i = 0; i < n - 1; i++) {
 			dataGridView_Histogram->Rows->Add();
-			dataGridView_Histogram->Rows[i]->Cells[1]->Value = Convert::ToDouble(xi.inverse_probability(i / (double) n));
+			dataGridView_Histogram->Rows[i]->Cells[1]->Value = Convert::ToDouble(xi.inverse_probability((i + 1) / (double) n));
 		}
-		dataGridView_Histogram->Rows->Add();
-		dataGridView_Histogram->Rows[n]->Cells[1]->Value = Convert::ToDouble(x_max);
-
 	}
 	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
 		Random_Variable xi;
@@ -782,7 +786,7 @@ namespace Graph {
 
 		R_0 += pow((n_j - sample_size * q_j), 2) / (sample_size * q_j);
 
-		for (int j = 1; j < n - 1; j++) {
+		for (int j = 1; j < n; j++) {
 			left = Convert::ToDouble(dataGridView_Histogram->Rows[j - 1]->Cells[1]->Value);
 			right = Convert::ToDouble(dataGridView_Histogram->Rows[j]->Cells[1]->Value);
 
@@ -811,7 +815,7 @@ namespace Graph {
 		int N = 5000;
 		double F = 0;
 		double step = R_0 / N;
-		double r = n;
+		double r = n + 1;
 		if (R_0 != 0) {
 			for (int i = 0; i < N; i++) {
 				F += step * pow(2, -r / 2.0) / tgamma(r / 2.0) * pow(i * step, r / 2.0 - 1) * exp(-i * step / 2.0);
